@@ -1,19 +1,46 @@
 <div class="award-container">
+  <form (submit)="onAddAward(awardForm)" #awardForm="ngForm">
     <mat-card>
       <mat-card-title>Awards</mat-card-title>
       <mat-form-field>
-        <input matInput placeholder="Award Title" required [(ngModel)]="enteredTitle">
+        <input 
+          matInput 
+          name="title"
+          placeholder="Award Title" 
+          ngModel
+          required
+          #title="ngModel">
+          <mat-error *ngIf="title.invalid">Please enter an award title.</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Date" required [(ngModel)]="enteredDate">
+        <input 
+          matInput 
+          name="date"
+          [matDatepicker]="picker" 
+          placeholder="Date" 
+          ngModel
+          required
+          #date>
+          <mat-error *ngIf="date.invalid">Please enter a valid date.</mat-error>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput placeholder="Enter your description here..." [(ngModel)]="enteredDescription"></textarea>
+        <textarea 
+          matInput 
+          name="description"
+          maxlength="150"
+          placeholder="Enter your description here..." 
+          ngModel
+          #desc></textarea>
+          <mat-error *ngIf="desc.invalid">Please shorten your description.</mat-error>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="onAddAward()">Save</button>
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit">Save</button>
       </mat-card-actions>
     </mat-card>
-  </div>
+  </form>
+</div>

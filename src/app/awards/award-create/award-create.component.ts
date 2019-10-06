@@ -1,9 +1,11 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Award } from 'src/app/awards/award';
+import { NgForm } from '@angular/forms';
 
 @Component ({
   selector: 'app-award-create',
-  templateUrl: './award-create.component.html'
+  templateUrl: './award-create.component.html',
+  styleUrls: ['./award-create.component.css']
 })
 export class AwardCreateComponent {
   enteredTitle = '';
@@ -12,11 +14,14 @@ export class AwardCreateComponent {
 
   @Output() awardCreated = new EventEmitter<Award>();
 
-  onAddAward() {
+  onAddAward(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     const award: Award = {
-      title: this.enteredTitle,
-      date: this.enteredDate,
-      description: this.enteredDescription
+      title: form.value.title,
+      date: form.value.date,
+      description: form.value.description
     };
     this.awardCreated.emit(award);
   }
