@@ -18,7 +18,7 @@ export class AwardListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.awardList = this.awardsService.getAwards();
-    this.awardsSub = this.awardsService.getPostUpdateListener()
+    this.awardsSub = this.awardsService.getAwardUpdateListener()
       .subscribe((awards: Award[]) => {
         this.awardList = awards;
       });

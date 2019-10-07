@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ContactInfo } from './contact-info/contact-info';
+import { ContactInfo } from './contact-info/contact-info.model';
 import { ObjectiveStatement } from './objective/objectiveStatement';
 import { Education } from './education/education';
 import { Experience } from './experience/experience';
@@ -13,14 +13,6 @@ import { Skill } from './skills/skill';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  contactInfo: ContactInfo = {
-    firstName: '',
-    lastName: '',
-    homeAddress: '',
-    phoneNumber: '',
-    emailAddress: '',
-    socialMediaLink: ''
-  };
   objectiveStatement: ObjectiveStatement = {
     statement: ''
   };
@@ -28,9 +20,6 @@ export class AppComponent {
   experiences: Experience[] = [];
   projects: Project[] = [];
   skills: Skill[] = [];
-  onContactInfoAdded(contactInfo: ContactInfo) {
-    this.contactInfo = contactInfo;
-  }
   onObjectiveStatementAdded(objectiveStatement: ObjectiveStatement) {
     this.objectiveStatement = objectiveStatement;
   }

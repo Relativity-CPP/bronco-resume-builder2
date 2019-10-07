@@ -1,28 +1,73 @@
 <div class="contact-info-container">
-  <mat-card>
-    <mat-card-title>Contact Information</mat-card-title>
-    <mat-form-field>
-      <input matInput placeholder="First Name" required [(ngModel)]="enteredFName">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Last Name" required [(ngModel)]="enteredLName">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Home Address" required [(ngModel)]="enteredAddress">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Phone Number" required [(ngModel)]="enteredPhoneNumber">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Email Address" required [(ngModel)]="enteredEmail">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Social Media Link" required [(ngModel)]="enteredSocialLink">
-    </mat-form-field>
-    <mat-card-actions>
-        <button mat-raised-button
-        color="primary"
-        (click)="onAddContactInfo()">Save</button>
-    </mat-card-actions>
-  </mat-card>
+  <form (submit)="onAddContactInfo(contactInfoForm)" #contactInfoForm="ngForm">
+      <mat-card>
+          <mat-card-title>Contact Information</mat-card-title>
+          <mat-form-field>
+            <input 
+              matInput 
+              name="firstName"
+              placeholder="First Name"  
+              ngModel
+              required
+              #firstName>
+          </mat-form-field>
+          <mat-form-field>
+            <input 
+              matInput 
+              name="lastName"
+              placeholder="Last Name" 
+              ngModel
+              required
+              #lastName>
+          </mat-form-field>
+          <mat-form-field>
+            <input 
+              matInput 
+              name="homeAddress"
+              placeholder="Home Address" 
+              ngModel
+              required 
+              #homeAddress>          
+          </mat-form-field>
+          <mat-form-field>
+            <input 
+              matInput 
+              name="phoneNumber"
+              placeholder="Phone Number" 
+              ngModel
+              required 
+              #phoneNumber>           
+          </mat-form-field>
+          <mat-form-field>
+            <input 
+              matInput 
+              name="emailAddress"
+              placeholder="Email Address" 
+              ngModel
+              required 
+              #emailAddress>            
+          </mat-form-field>
+          <mat-form-field>
+            <input 
+              matInput 
+              name="socialMediaLink"
+              placeholder="Social Media Link" 
+              ngModel
+              #socialMediaLink>            
+          </mat-form-field>
+          <mat-card-actions>
+            <button 
+              mat-raised-button
+              color="primary"
+              type="submit">Save</button>
+          </mat-card-actions>
+        </mat-card>
+  </form>
+
+  <p>First Name: {{ contactInfo.firstName }}</p>
+  <p>Last Name: {{ contactInfo.lastName }}</p>
+  <p>Home Address: {{ contactInfo.homeAddress }}</p>
+  <p>Phone Number: {{ contactInfo.phoneNumber }}</p>
+  <p>Email Address: {{ contactInfo.emailAddress }}</p>
+  <p>Social Media Link: {{ contactInfo.socialMediaLink }}</p>
 </div>

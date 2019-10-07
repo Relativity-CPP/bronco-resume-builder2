@@ -23,5 +23,6 @@ export class AwardCreateComponent {
       description: form.value.description
     };
     this.awardsService.addAward(award);
+    form.resetForm();
   }
 }

@@ -1,12 +1,6 @@
 <app-header></app-header>
 <main>
-    <app-contact-info-create (contactInfoCreated)="onContactInfoAdded($event)"></app-contact-info-create>
-    <p>{{contactInfo.firstName}}</p>
-    <p>{{contactInfo.lastName}}</p>
-    <p>{{contactInfo.phoneNumber}}</p>
-    <p>{{contactInfo.emailAddress}}</p>
-    <p>{{contactInfo.homeAddress}}</p>
-    <p>{{contactInfo.socialMediaLink}}</p>
+    <app-contact-info-create></app-contact-info-create>
     <app-objective-create (objectiveStatementCreated)="onObjectiveStatementAdded($event)"></app-objective-create>
     <p>{{objectiveStatement.statement}}</p>
     <app-education-create (educationCreated)="onEducationAdded($event)"></app-education-create>

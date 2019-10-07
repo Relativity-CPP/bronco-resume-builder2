@@ -17,7 +17,7 @@ export class AwardsService {
         this.awardsUpdated.next([...this.awards]);
     }
 
-    getPostUpdateListener() {
+    getAwardUpdateListener() {
         return this.awardsUpdated.asObservable();
     }
 }
