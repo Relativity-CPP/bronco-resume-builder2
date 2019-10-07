@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { Award } from 'src/app/awards/award';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Award } from '../award.model';
+import { AwardsService } from '../awards.service';
 
 @Component ({
   selector: 'app-award-list',
@@ -7,6 +10,21 @@ import { Award } from 'src/app/awards/award';
   styleUrls: ['./award-list.component.css']
 })
 
-export class AwardListComponent {
-  @Input() awardList: Award[] = [];
+export class AwardListComponent implements OnInit, OnDestroy {
+  awardList: Award[] = [];
+  private awardsSub: Subscription;
+
+  constructor(public awardsService: AwardsService) {}
+
+  ngOnInit() {
+    this.awardList = this.awardsService.getAwards();
+    this.awardsSub = this.awardsService.getPostUpdateListener()
+      .subscribe((awards: Award[]) => {
+        this.awardList = awards;
+      });
+  }
+
+  ngOnDestroy() {
+    this.awardsSub.unsubscribe();
+  }
 }

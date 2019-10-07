@@ -6,7 +6,6 @@ import { Education } from './education/education';
 import { Experience } from './experience/experience';
 import { Project } from './projects/project';
 import { Skill } from './skills/skill';
-import { Award } from './awards/award';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +28,6 @@ export class AppComponent {
   experiences: Experience[] = [];
   projects: Project[] = [];
   skills: Skill[] = [];
-  awards: Award[] = [];
   onContactInfoAdded(contactInfo: ContactInfo) {
     this.contactInfo = contactInfo;
   }
@@ -51,8 +49,5 @@ export class AppComponent {
   onSkillAdded(skill: Skill) {
     this.skills.push(skill);
     alert('There are ' + this.skills.length + ' skills');
-  }
-  onAwardAdded(award: Award) {
-    this.awards.push(award);
   }
 }

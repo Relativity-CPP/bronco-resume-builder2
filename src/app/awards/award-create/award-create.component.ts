@@ -1,6 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Award } from 'src/app/awards/award';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
+import { Award } from '../award.model';
+import { AwardsService } from '../awards.service';
 
 @Component ({
   selector: 'app-award-create',
@@ -8,11 +10,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./award-create.component.css']
 })
 export class AwardCreateComponent {
-  enteredTitle = '';
-  enteredDate = new Date();
-  enteredDescription = '';
 
-  @Output() awardCreated = new EventEmitter<Award>();
+  constructor(public awardsService: AwardsService) {}
 
   onAddAward(form: NgForm) {
     if (form.invalid) {
@@ -23,6 +22,6 @@ export class AwardCreateComponent {
       date: form.value.date,
       description: form.value.description
     };
-    this.awardCreated.emit(award);
+    this.awardsService.addAward(award);
   }
 }
