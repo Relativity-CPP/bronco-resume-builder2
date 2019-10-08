@@ -9,6 +9,8 @@
     <app-experience-list [experienceList]="experiences"></app-experience-list>
     <app-skill-create (skillCreated)="onSkillAdded($event)"></app-skill-create>
     <app-skill-list [skillList]="skills"></app-skill-list>
+    <app-project-create (projectCreated)="onProjectAdded($event)"></app-project-create>
+    <app-project-list [projectList]="projects"></app-project-list>
     <app-award-create></app-award-create>
     <app-award-list></app-award-list>
 </main>
