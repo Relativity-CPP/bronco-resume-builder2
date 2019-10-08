@@ -11,7 +11,7 @@ import { ContactInfoService } from '../contact-info.service';
   styleUrls: ['./contact-info-create.component.css']
 })
 
-export class ContactInfoCreateComponent implements OnInit, OnDestroy{
+export class ContactInfoCreateComponent implements OnInit, OnDestroy {
   contactInfo: ContactInfo;
   private contactInfoSub: Subscription;
 

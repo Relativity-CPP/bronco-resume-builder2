@@ -1,5 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Education } from 'src/app/education/education';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { Education } from 'src/app/education/education.model';
+import { EducationService } from '../education.service';
 
 @Component ({
   selector: 'app-education-create',
@@ -8,24 +11,19 @@ import { Education } from 'src/app/education/education';
 })
 
 export class EducationCreateComponent {
-  enteredSchoolName = '';
-  selectedDegreeType = '';
-  enteredStartDate = new Date();
-  enteredEndDate = new Date();
-  enteredMajor = '';
-  enteredGPA = '';
 
-  @Output() educationCreated = new EventEmitter<Education>();
+  constructor(public educationService: EducationService) {}
 
-  onAddEducation() {
+  onAddEducation(form: NgForm) {
     const education: Education = {
-      schoolName: this.enteredSchoolName,
-      degreeType: this.selectedDegreeType,
-      schoolStartDate: this.enteredStartDate,
-      schoolEndDate: this.enteredEndDate,
-      major: this.enteredMajor,
-      gpa: this.enteredGPA,
+      schoolName: form.value.schoolName,
+      degreeType: form.value.degreeType,
+      schoolStartDate: form.value.schoolStartDate,
+      schoolEndDate: form.value.schoolEndDate,
+      major: form.value.major,
+      gpa: form.value.GPA,
     };
-    this.educationCreated.emit(education);
+    this.educationService.addEducation(education);
+    form.resetForm();
   }
 }

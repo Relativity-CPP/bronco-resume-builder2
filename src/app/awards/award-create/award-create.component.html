@@ -20,7 +20,7 @@
           placeholder="Date" 
           ngModel
           required
-          #date>
+          #date="ngModel">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -28,10 +28,10 @@
         <textarea 
           matInput 
           name="description"
-          maxlength="150"
+          maxlength="15"
           placeholder="Enter your description here..." 
           ngModel
-          #desc></textarea>
+          #desc="ngModel"></textarea>
           <mat-error *ngIf="desc.invalid">Please shorten your description.</mat-error>
       </mat-form-field>
       <mat-card-actions>

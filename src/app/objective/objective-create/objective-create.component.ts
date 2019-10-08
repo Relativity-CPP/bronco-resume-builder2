@@ -1,5 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { ObjectiveStatement } from 'src/app/objective/objectiveStatement';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
+
+import { ObjectiveStatement } from 'src/app/objective/objectiveStatement.model';
+import { ObjectiveStatementService } from '../objectveStatement.service';
 
 @Component ({
   selector: 'app-objective-create',
@@ -7,15 +11,32 @@ import { ObjectiveStatement } from 'src/app/objective/objectiveStatement';
   styleUrls: ['./objective-create.component.css']
 })
 
-export class ObjectiveCreateComponent {
-  enteredObjectiveStatement = '';
+export class ObjectiveCreateComponent implements OnInit, OnDestroy {
+  objectiveStatement: ObjectiveStatement;
+  private objectiveStatementSub: Subscription;
 
-  @Output() objectiveStatementCreated = new EventEmitter<ObjectiveStatement>();
+  constructor(public objectiveStatementService: ObjectiveStatementService) {}
 
-  onAddObjectiveStatement() {
+  onAddObjectiveStatement(form: NgForm) {
+    if (form.invalid) {
+      alert('error');
+      return;
+    }
     const objectiveStatement: ObjectiveStatement = {
-      statement: this.enteredObjectiveStatement
+      statement: form.value.statement,
     };
-    this.objectiveStatementCreated.emit(objectiveStatement);
+    this.objectiveStatementService.addObjectiveStatement(objectiveStatement);
+  }
+
+  ngOnInit() {
+    this.objectiveStatement = this.objectiveStatementService.getObjectiveStatement();
+    this.objectiveStatementSub = this.objectiveStatementService.getObjectiveStatementUpdateListener()
+      .subscribe((objectiveStatement: ObjectiveStatement) => {
+        this.objectiveStatement = objectiveStatement;
+      });
+  }
+
+  ngOnDestroy() {
+    this.objectiveStatementSub.unsubscribe();
   }
 }
