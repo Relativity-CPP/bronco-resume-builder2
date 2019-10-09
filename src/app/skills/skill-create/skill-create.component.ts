@@ -1,21 +1,26 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Skill } from 'src/app/skills/skill';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { Skill } from '../skill.model';
+import { SkillsService } from '../skill.service';
 
 @Component ({
   selector: 'app-skill-create',
   templateUrl: './skill-create.component.html',
   styleUrls: ['./skill-create.component.css']
 })
-
 export class SkillCreateComponent {
-  enteredSkill = '';
 
-  @Output() skillCreated = new EventEmitter<Skill>();
+  constructor(public skillsService: SkillsService) {}
 
-  onAddSkill() {
+  onAddSkill(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     const skill: Skill = {
-      description: this.enteredSkill,
+      description: form.value.description,
     };
-    this.skillCreated.emit(skill);
+    this.skillsService.addSkill(skill);
+    form.resetForm();
   }
 }

@@ -15,6 +15,9 @@ export class EducationCreateComponent {
   constructor(public educationService: EducationService) {}
 
   onAddEducation(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     const education: Education = {
       schoolName: form.value.schoolName,
       degreeType: form.value.degreeType,

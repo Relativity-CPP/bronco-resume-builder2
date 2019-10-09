@@ -27,7 +27,7 @@ import { ObjectiveCreateComponent } from './objective/objective-create/objective
 import { ProjectCreateComponent } from './projects/project-create/project-create.component';
 import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { SkillCreateComponent } from './skills/skill-create/skill-create.component';
-import { SkillListComponent } from './skills/skill-list/skill-list/skill-list.component';
+import { SkillListComponent } from './skills/skill-list/skill-list.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({

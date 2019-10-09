@@ -1,5 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Experience } from 'src/app/experience/experience';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { Experience } from 'src/app/experience/experience.model';
+import { ExperienceService } from '../experience.service';
 
 @Component ({
   selector: 'app-experience-create',
@@ -8,22 +11,21 @@ import { Experience } from 'src/app/experience/experience';
 })
 
 export class ExperienceCreateComponent {
-  enteredCompanyName = '';
-  enteredJobTitle = '';
-  enteredStartDate = new Date();
-  enteredEndDate = new Date();
-  enteredDescription = '';
 
-  @Output() experienceCreated = new EventEmitter<Experience>();
+  constructor(public experienceService: ExperienceService) {}
 
-  onAddExperience() {
+  onAddExperience(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     const experience: Experience = {
-      companyName: this.enteredCompanyName,
-      jobTitle: this.enteredJobTitle,
-      jobStartDate: this.enteredStartDate,
-      jobEndDate: this.enteredEndDate,
-      description: this.enteredDescription
+      companyName: form.value.companyName,
+      jobTitle: form.value.jobTitle,
+      jobStartDate: form.value.jobStartDate,
+      jobEndDate: form.value.jobEndDate,
+      description: form.value.description
     };
-    this.experienceCreated.emit(experience);
+    this.experienceService.addExperience(experience);
+    form.resetForm();
   }
 }

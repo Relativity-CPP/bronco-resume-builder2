@@ -1,5 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Project } from 'src/app/projects/project';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { Project } from 'src/app/projects/project.model';
+import { ProjectService } from '../project.service';
 
 @Component ({
   selector: 'app-project-create',
@@ -8,20 +11,20 @@ import { Project } from 'src/app/projects/project';
 })
 
 export class ProjectCreateComponent {
-  enteredTitle = '';
-  enteredStartDate = new Date();
-  enteredEndDate = new Date();
-  enteredDescription = '';
 
-  @Output() projectCreated = new EventEmitter<Project>();
+  constructor(public projectService: ProjectService) {}
 
-  onAddProject() {
+  onAddProject(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     const project: Project = {
-      title: this.enteredTitle,
-      startDate: this.enteredStartDate,
-      endDate: this.enteredEndDate,
-      description: this.enteredDescription
+      title: form.value.title,
+      startDate: form.value.startDate,
+      endDate: form.value.endDate,
+      description: form.value.description
     };
-    this.projectCreated.emit(project);
+    this.projectService.addProject(project);
+    form.resetForm();
   }
 }

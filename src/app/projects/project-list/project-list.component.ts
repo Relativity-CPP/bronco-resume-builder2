@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { Project } from 'src/app/projects/project';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Project } from '../project.model';
+import { ProjectService } from '../project.service';
 
 @Component ({
   selector: 'app-project-list',
@@ -7,6 +10,21 @@ import { Project } from 'src/app/projects/project';
   styleUrls: ['./project-list.component.css']
 })
 
-export class ProjectListComponent {
-  @Input() projectList: Project[] = [];
+export class ProjectListComponent implements OnInit, OnDestroy {
+  projectList: Project[] = [];
+  private projectSub: Subscription;
+
+  constructor(public projectService: ProjectService) {}
+
+  ngOnInit() {
+    this.projectList = this.projectService.getProjects();
+    this.projectSub = this.projectService.getProjectsUpdateListener()
+    .subscribe((project: Project[]) => {
+      this.projectList = project;
+    });
+  }
+
+  ngOnDestroy() {
+    this.projectSub.unsubscribe();
+  }
 }
